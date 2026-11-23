@@ -17,7 +17,6 @@
       --p5-font: "Impact", "Arial Black", sans-serif;
     }
 
-    /* Default: Blue */
     body[data-theme="blue"] {
       --bg-color: #f4f7ff;
       --grid-color: rgba(0, 51, 255, 0.05);
@@ -29,7 +28,6 @@
       --accent-light: #8ab4ff;
     }
 
-    /* Crimson */
     body[data-theme="crimson"] {
       --bg-color: #fff5f5;
       --grid-color: rgba(255, 0, 51, 0.05);
@@ -41,14 +39,13 @@
       --accent-light: #ff8a9e;
     }
 
-    /* Dark Night */
     body[data-theme="dark-night"] {
       --bg-color: #121212;
       --grid-color: rgba(255, 255, 255, 0.03);
       --ink: #ffffff;
       --muted: #888888;
       --paper: #1e1e1e;
-      --accent: #e60012; /* P5 Red */
+      --accent: #e60012;
       --accent-dark: #990000;
       --accent-light: #ff4d4d;
     }
@@ -58,7 +55,6 @@
     body[data-theme="dark-night"] .camera-placeholder .placeholder-copy { color: #aaa; }
     body[data-theme="dark-night"] .camera-caption { color: var(--accent); }
 
-    /* Dark Purple */
     body[data-theme="dark-purple"] {
       --bg-color: #1a0b2e;
       --grid-color: rgba(212, 0, 255, 0.05);
@@ -92,12 +88,12 @@
       transition: background-color 0.3s ease;
     }
 
-    /* Decorative background elements */
     .bg-decor { position: absolute; pointer-events: none; z-index: 0; }
     .bg-star { color: var(--accent); font-size: 40px; text-shadow: 3px 3px 0 var(--paper); }
     .bg-star-1 { top: 10%; left: 5%; transform: rotate(15deg); }
     .bg-star-2 { bottom: 20%; right: 10%; font-size: 60px; transform: rotate(-10deg); }
     .bg-star-3 { top: 40%; right: 5%; font-size: 24px; }
+    
     .bg-06 {
       bottom: -20px; right: 20px; font-family: var(--p5-font);
       font-size: 180px; font-weight: 900; color: var(--paper);
@@ -114,10 +110,10 @@
     
     .app { 
       position: relative; z-index: 10; width: min(1160px, 100%); min-height: 100vh; 
-      margin: 0 auto; padding: 30px 44px 25px; transition: transform 0.3s ease;
+      margin: 0 auto; padding: 30px 44px 80px; 
+      transition: transform 0.3s ease;
     }
 
-    /* Wobble Animation */
     .app.wobble { animation: wobble 6s ease-in-out infinite; }
     @keyframes wobble {
       0%, 100% { transform: scale(1) rotate(0deg) translateY(0); }
@@ -127,7 +123,6 @@
     }
 
     header { display: flex; align-items: flex-start; justify-content: flex-end; padding-bottom: 20px; margin-bottom: 10px; position: relative; z-index: 2; }
-
     .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
     .privacy-note { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; font-family: sans-serif; }
     .privacy-note svg { width: 15px; height: 15px; color: var(--accent); }
@@ -136,8 +131,7 @@
       width: 44px; height: 44px; display: grid; place-items: center; padding: 0; 
       border: 2px solid var(--ink); border-radius: 0; background: var(--paper); 
       color: var(--ink); cursor: pointer; transition: all .15s ease; 
-      transform: skewX(-10deg);
-      box-shadow: 4px 4px 0 var(--accent);
+      transform: skewX(-10deg); box-shadow: 4px 4px 0 var(--accent);
     }
     .icon-button:hover { transform: skewX(-10deg) translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); color: var(--accent); }
     .icon-button svg { width: 20px; height: 20px; transform: skewX(10deg); }
@@ -164,7 +158,7 @@
     
     .camera-card {
       position: relative; width: 100%; aspect-ratio: 4 / 3; background: var(--paper);
-      padding: 16px 16px 60px 16px; /* Polaroid border */
+      padding: 16px 16px 60px 16px; 
       box-shadow: 8px 8px 0 var(--accent), 12px 12px 30px rgba(0,0,0,0.1);
       border: 2px solid var(--ink); overflow: hidden;
     }
@@ -291,9 +285,17 @@
     .filter-button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--accent); }
     .swatch { width: 44px; height: 44px; border: 2px solid var(--ink); border-radius: 0; background: linear-gradient(145deg, #d6ae9e 0%, #f0d6bf 43%, #9d7771 100%); box-shadow: none; transition: transform .2s ease; }
     .filter-button:hover .swatch { transform: scale(1.1); }
-    .swatch.warm { background: linear-gradient(145deg, #efd09b 0%, #dda085 46%, #795349 100%); }
-    .swatch.mono { background: linear-gradient(145deg, #f2ede5 0%, #a9a19a 48%, #48484a 100%); }
-    .swatch.rose { background: linear-gradient(145deg, #eec4be 0%, #d18a91 48%, #764c63 100%); }
+    .swatch.warm     { background: linear-gradient(145deg, #efd09b 0%, #dda085 46%, #795349 100%); }
+    .swatch.vintage  { background: linear-gradient(145deg, #e8c9a0 0%, #b88a5e 48%, #5c4030 100%); }
+    .swatch.sunset   { background: linear-gradient(145deg, #ffd89b 0%, #ff8c69 48%, #8b3a62 100%); }
+    .swatch.rose     { background: linear-gradient(145deg, #eec4be 0%, #d18a91 48%, #764c63 100%); }
+    .swatch.lavender { background: linear-gradient(145deg, #e8d8f5 0%, #b088d0 48%, #5a3e75 100%); }
+    .swatch.cool     { background: linear-gradient(145deg, #d4f0ff 0%, #7fb8d8 48%, #2c4a63 100%); }
+    .swatch.mint     { background: linear-gradient(145deg, #d8f5d8 0%, #7fc99b 48%, #2e5e45 100%); }
+    .swatch.fade     { background: linear-gradient(145deg, #f5ece2 0%, #d4c8ba 48%, #a89888 100%); }
+    .swatch.vivid    { background: linear-gradient(145deg, #ffd166 0%, #ef476f 48%, #118ab2 100%); }
+    .swatch.mono     { background: linear-gradient(145deg, #f2ede5 0%, #a9a19a 48%, #48484a 100%); }
+    .swatch.noir     { background: linear-gradient(145deg, #f5f5f5 0%, #6a6a6a 48%, #050505 100%); }
     
     .rule { height: 4px; margin: 0 0 24px; background: var(--ink); transform: skewX(-20deg); }
     
@@ -350,8 +352,10 @@
     .download-button[hidden] { display: none; }
     
     footer { 
+      position: relative; z-index: 5;
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; 
-      margin-top: 50px; padding-top: 20px; border-top: 4px solid var(--ink); 
+      margin-top: 40px; padding: 20px 10px 30px; border-top: 4px solid var(--ink); 
+      background: var(--bg-color); 
       color: var(--ink); font: 900 16px var(--p5-font); text-transform: uppercase; letter-spacing: .05em; 
       transform: skewX(-5deg);
     }
@@ -360,9 +364,9 @@
     
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-    /* ---- Settings Sheet (Kept Glass Theme) ---- */
+    /* ---- Settings Sheet ---- */
     .settings-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; justify-content: flex-end; background: rgba(0,0,0,.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-    .settings-backdrop[hidden], .print-overlay[hidden] { display: none; }
+    .settings-backdrop[hidden], .print-overlay[hidden], .sticker-overlay[hidden] { display: none; }
     
     .settings-sheet { 
       width: min(400px, 100%); height: 100%; overflow: auto; padding: 30px 24px; 
@@ -389,9 +393,6 @@
     .seg button:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
     .seg button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 3px 3px 0 #000; transform: skewX(-8deg) translate(2px, 2px); }
     
-    .seg.dots button { flex: 0 0 auto; width: 48px; display: flex; justify-content: center; align-items: center; }
-    .dot { display: block; width: 24px; height: 24px; border-radius: 0; border: 2px solid #fff; }
-    
     #settingsClose { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 0; background: rgba(255,255,255,0.1); border: 2px solid transparent; color: #fff; cursor: pointer; transition: all 0.2s; transform: skewX(-10deg); }
     #settingsClose:hover { background: var(--accent); border-color: #fff; transform: skewX(-10deg) rotate(90deg); }
     #settingsClose svg { transform: skewX(10deg); }
@@ -399,16 +400,162 @@
     .settings-sheet #resetSettings { background: transparent; color: #fff; border-color: #ff0033; box-shadow: 4px 4px 0 #ff0033; margin-top: 20px; }
     .settings-sheet #resetSettings:hover { background: #ff0033; color: #fff; }
 
+    /* ---- STICKER STUDIO OVERLAY (PAINT STYLE MEETS P5 GLASS) ---- */
+    .sticker-overlay {
+      position: fixed; inset: 0; z-index: 55; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      padding: 20px; animation: fade .3s ease;
+    }
+
+    .paint-window {
+      width: min(900px, 100%); height: min(700px, 95vh);
+      display: flex; flex-direction: column;
+      background: rgba(25, 25, 35, 0.7); /* Glass base */
+      backdrop-filter: blur(25px) saturate(150%); -webkit-backdrop-filter: blur(25px) saturate(150%);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 12px 12px 0 var(--accent), 0 20px 50px rgba(0,0,0,0.5);
+      transform: skewX(-2deg);
+      overflow: hidden;
+    }
+
+    .paint-titlebar {
+      background: var(--ink); padding: 8px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      transform: skewX(2deg); 
+      margin: -2px -2px 0 -2px; 
+    }
+    
+    .paint-titlebar h3 {
+      margin: 0; color: var(--paper); font: 900 18px var(--p5-font);
+      text-transform: uppercase; letter-spacing: 1px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    
+    .paint-titlebar .win-controls { display: flex; gap: 6px; }
+    .paint-titlebar .win-btn {
+      width: 16px; height: 16px; background: var(--paper); border: 2px solid var(--accent);
+      display: grid; place-items: center; cursor: pointer; font-weight: bold; font-size: 10px; color: var(--ink);
+    }
+    
+    .paint-body {
+      display: flex; flex: 1; overflow: hidden; transform: skewX(2deg); 
+      padding: 12px; gap: 12px;
+    }
+
+    /* Left Toolbar */
+    .paint-tools {
+      width: 160px; display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start;
+      background: rgba(0,0,0,0.3); padding: 10px; border: 2px solid rgba(255,255,255,0.1);
+      overflow-y: auto;
+    }
+    
+    .tool-btn {
+      width: 60px; height: 60px; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center; padding: 4px;
+      cursor: pointer; transition: all 0.1s;
+    }
+    .tool-btn img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+    .tool-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--accent); transform: scale(1.05); }
+    .tool-btn.active { background: var(--accent); border-color: var(--paper); box-shadow: 0 0 10px var(--accent); }
+    
+    .tool-upload {
+      width: 100%; margin-bottom: 8px; background: var(--accent); color: var(--paper); border: 2px solid var(--paper);
+      font-family: var(--p5-font); font-size: 14px; padding: 8px; cursor: pointer; text-align: center;
+      text-transform: uppercase; transition: all 0.1s;
+    }
+    .tool-upload:hover { background: var(--accent-dark); transform: scale(0.95); }
+    
+    .tool-clear {
+      width: 100%; margin-top: auto; background: #ff0033; color: #fff; border: 2px solid #fff;
+      font-family: var(--p5-font); font-size: 14px; padding: 8px; cursor: pointer; text-align: center;
+      text-transform: uppercase; transition: all 0.1s;
+    }
+    .tool-clear:hover { background: #aa0022; transform: scale(0.95); }
+
+    /* Right Canvas Area */
+    .paint-canvas-area {
+      flex: 1; background: #fff; position: relative; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border: 4px solid rgba(255,255,255,0.2); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+      background-image: 
+        linear-gradient(45deg, #ccc 25%, transparent 25%), 
+        linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #ccc 75%), 
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      background-color: #e0e0e0;
+      touch-action: none; /* Prevent scrolling while dragging on mobile */
+    }
+
+    .paint-canvas-area > img {
+      max-width: 90%; max-height: 90%; object-fit: contain;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      pointer-events: none; /* Let clicks pass to stickers */
+    }
+
+    /* Draggable Sticker */
+    .placed-sticker {
+      position: absolute; width: 80px; height: 80px; cursor: grab; user-select: none;
+      transform: translate(-50%, -50%); 
+      filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.5));
+      border: 2px dashed transparent;
+      touch-action: none;
+      z-index: 10;
+    }
+    .placed-sticker:active { cursor: grabbing; }
+    .placed-sticker.selected {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.2);
+      z-index: 20;
+    }
+    .placed-sticker img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+    
+    /* Controls inside sticker */
+    .sticker-controls {
+      display: none; position: absolute; inset: -10px; pointer-events: none;
+    }
+    .placed-sticker.selected .sticker-controls { display: block; }
+    
+    .resize-handle {
+      position: absolute; bottom: -6px; right: -6px; width: 14px; height: 14px;
+      background: var(--paper); border: 2px solid var(--ink); cursor: nwse-resize;
+      pointer-events: auto;
+    }
+    
+    .delete-handle {
+      position: absolute; top: -10px; right: -10px; width: 20px; height: 20px;
+      background: #ff0033; color: #fff; border: 2px solid var(--ink); border-radius: 50%;
+      display: grid; place-items: center; font-size: 12px; font-weight: bold; cursor: pointer;
+      pointer-events: auto;
+    }
+
+    /* Status Bar */
+    .paint-statusbar {
+      height: 30px; background: rgba(0,0,0,0.5); border-top: 2px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 12px;
+      color: #ccc; font-family: sans-serif; font-size: 11px;
+      transform: skewX(2deg); margin: 0 -2px -2px -2px;
+    }
+
+    .finish-btn {
+      background: var(--accent); color: var(--paper); border: 2px solid var(--ink);
+      font-family: var(--p5-font); font-size: 16px; padding: 4px 16px; cursor: pointer;
+      text-transform: uppercase; box-shadow: 2px 2px 0 #000; transition: all 0.1s;
+    }
+    .finish-btn:hover { background: var(--accent-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 #000; }
+    .finish-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #000; }
+
+
     /* ---- Print Overlay & 3D Camera ---- */
     .print-overlay { position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; align-items: center; padding: 20px; background: rgba(0,0,0,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); animation: fade .3s ease; overflow-y: auto; }
     @keyframes fade { from { opacity: 0; } }
     
     .print-stage { 
       display: flex; flex-direction: column; align-items: center; position: relative; 
-      padding-top: 40px; padding-bottom: 60px;
+      padding-top: 40px; padding-bottom: 100px; 
     }
     
-    /* NEW ONE-STEP CAMERA CSS */
     .pcam-3d {
       position: relative; z-index: 10; width: 340px; height: 220px;
       filter: drop-shadow(0 25px 35px rgba(0,0,0,0.6));
@@ -420,7 +567,7 @@
 
     .cam-body {
       position: absolute; inset: 0; 
-      background: #f5f5f5; /* Classic white/cream body */
+      background: #f5f5f5;
       border-radius: 20px 20px 10px 10px; 
       border: 4px solid var(--ink);
       box-shadow: inset 0 -20px 0 rgba(0,0,0,0.1), inset 0 4px 0 rgba(255, 255, 255, 0.8), 12px 12px 0 var(--accent);
@@ -429,7 +576,6 @@
     
     body[data-theme="dark-night"] .cam-body, body[data-theme="dark-purple"] .cam-body { background: #2a2a2a; }
     
-    /* Top Black Section */
     .cam-top {
       height: 50px; background: #1a1a1a;
       border-bottom: 4px solid var(--ink);
@@ -437,13 +583,11 @@
       display: flex; align-items: center; padding: 0 15px;
     }
     
-    /* Middle Main Section */
     .cam-middle {
       flex: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
       position: relative;
     }
 
-    /* Lens */
     .lens-container {
       width: 90px; height: 90px; background: #222; border-radius: 50%;
       border: 4px solid #555; display: grid; place-items: center;
@@ -461,7 +605,6 @@
       filter: blur(2px);
     }
 
-    /* Side Elements */
     .cam-side-elements {
       display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
       margin-right: 10px; position: relative;
@@ -479,7 +622,6 @@
       box-shadow: inset -2px -2px 5px rgba(0,0,0,0.4);
     }
 
-    /* Rainbow Stripe */
     .rainbow-stripe {
       position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 12px; height: 50px;
@@ -487,7 +629,6 @@
       border: 2px solid var(--ink); border-bottom: none;
     }
 
-    /* OneStep Label */
     .cam-label {
       position: absolute; top: 15px; left: 15px;
       background: #111; color: #fff; padding: 2px 8px;
@@ -495,7 +636,6 @@
       border-radius: 2px;
     }
 
-    /* Bottom Bar with Slot */
     .cam-bottom {
       height: 34px; background: #333; border-top: 4px solid var(--ink);
       position: relative; display: flex; justify-content: center; align-items: flex-end;
@@ -511,11 +651,10 @@
       z-index: 15;
     }
 
-    /* --- PRINTING ANIMATION --- */
     .strip-container {
       position: relative;
       width: 170px;
-      margin-top: -8px; /* Pull it up into the slot */
+      margin-top: -8px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -533,12 +672,12 @@
     .strip-frame {
       width: 100%;
       background: #ffffff;
-      padding: 12px 12px 45px 12px; /* Classic polaroid border */
+      padding: 12px 12px 45px 12px; 
       border-left: 2px solid #ddd;
       border-right: 2px solid #ddd;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       position: relative;
-      margin-top: -2px; /* Overlap slightly for continuous look */
+      margin-top: -2px; 
       cursor: pointer;
       opacity: 0;
       transform: translateY(-100%);
@@ -546,21 +685,14 @@
       transition: filter 0.2s ease;
     }
 
-    .strip-frame:hover {
-      filter: brightness(0.9);
-    }
+    .strip-frame:hover { filter: brightness(0.9); }
 
     @keyframes feedPaper {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* The actual photo square */
     .strip-frame .shot {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #000;
-      overflow: hidden;
-      position: relative;
+      width: 100%; aspect-ratio: 1; background: #000; overflow: hidden; position: relative;
       animation: develop 3s ease-out forwards;
     }
 
@@ -569,23 +701,15 @@
       100% { filter: none; }
     }
 
-    .strip-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
+    .strip-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .strip-frame span {
       position: absolute; bottom: 12px; left: 0; right: 0;
       text-align: center; color: #333; font: bold 12px var(--p5-font);
       text-transform: uppercase; letter-spacing: 1px;
     }
 
-    /* Torn edge effect at the bottom */
     .strip-frame:last-child::after {
-      content: ""; position: absolute; bottom: -10px; left: 0; right: 0; height: 10px;
-      background: #ffffff;
+      content: ""; position: absolute; bottom: -10px; left: 0; right: 0; height: 10px; background: #ffffff;
       clip-path: polygon(0% 0%, 5% 100%, 10% 0%, 15% 100%, 20% 0%, 25% 100%, 30% 0%, 35% 100%, 40% 0%, 45% 100%, 50% 0%, 55% 100%, 60% 0%, 65% 100%, 70% 0%, 75% 100%, 80% 0%, 85% 100%, 90% 0%, 95% 100%, 100% 0%);
     }
 
@@ -594,46 +718,94 @@
     .print-close > * { transform: skewX(10deg); }
     .print-close:hover { background: var(--accent-dark); transform: skewX(-10deg) translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
 
-    /* Responsive */
+    /* ---- RESPONSIVE FIXES ---- */
     @media (max-width: 900px) {
-      .app { width: min(760px, 100%); padding: 23px 30px; }
+      .app { width: min(760px, 100%); padding: 23px 30px 60px; }
       main { grid-template-columns: minmax(0, 1fr); gap: 2px; padding-top: 25px; }
       .control-panel { padding-top: 32px; }
       .filter-list { max-width: 390px; }
       .strip-card { margin-top: 20px; }
       .bg-06 { font-size: 120px; bottom: 10px; }
+      
+      .paint-window { height: 90vh; }
+      .paint-body { flex-direction: column; }
+      .paint-tools { width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .tool-btn { width: 50px; height: 50px; }
+      .tool-upload { width: auto; margin-right: 10px; margin-bottom: 0; padding: 0 15px; }
+      .tool-clear { margin-top: 0; margin-left: 10px; width: auto; padding: 0 15px; }
     }
+    
     @media (max-width: 610px) {
-      .app { padding: 17px 16px 21px; }
+      .app { padding: 17px 16px 40px; }
       header { padding-bottom: 17px; }
       .privacy-note { font-size: 0; gap: 0; }
       .privacy-note svg { width: 20px; height: 20px; }
       main { grid-template-columns: minmax(0, 1fr); gap: 4px; }
       .intro { margin-bottom: 20px; }
-      h1 { font-size: 44px; }
+      h1 { font-size: 44px; text-shadow: 3px 3px 0 var(--paper), 6px 6px 0 var(--accent-dark); }
       h1 span { font-size: 14px; margin-top: 10px; }
+      
+      .camera-card { padding: 10px 10px 50px 10px; }
+      video, .camera-placeholder, .countdown, .flash { top: 10px; left: 10px; width: calc(100% - 20px); height: calc(100% - 60px); }
+      .camera-caption { bottom: 10px; left: 12px; right: 12px; font-size: 12px; line-height: 1.2; }
+      .camera-caption span:first-child { max-width: 85%; display: block; }
+      .camera-caption .star { font-size: 16px; }
+      
       .control-panel { padding-top: 17px; }
-      .control-copy { margin-bottom: 14px; }
-      .filter-list { margin-bottom: 17px; }
+      .control-copy { margin-bottom: 14px; font-size: 12px; }
+      
+      .filter-list { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+      .swatch { width: 40px; height: 40px; }
+      .filter-button { font-size: 10px; padding: 8px 4px; transform: skewX(-4deg); }
+      .filter-button > * { transform: skewX(4deg); }
+      
+      .layout-list { grid-template-columns: 1fr; gap: 10px; }
+      .layout-button { transform: skewX(-4deg); box-shadow: 3px 3px 0 var(--ink); }
+      .layout-button > * { transform: skewX(4deg); }
+      .layout-button:hover { transform: skewX(-4deg) translate(-2px, -2px); box-shadow: 5px 5px 0 var(--accent); }
+      .layout-button[aria-pressed="true"] { transform: skewX(-4deg) translate(2px, 2px); }
+      
       .strip-card { margin-top: 18px; padding: 14px; }
       .strip-preview img { width: min(100%, 190px); }
-      footer { margin-top: 23px; }
-      footer > span:first-child { flex: 1 1 100%; text-align: center; }
-      .watermark { align-self: flex-end; }
-      .bg-06 { font-size: 80px; }
       
-      .pcam-3d { width: 280px; height: 180px; }
+      footer { 
+        margin-top: 20px; flex-direction: column; align-items: center; text-align: center; 
+        transform: none; padding: 15px 10px 30px; background: var(--bg-color); 
+      }
+      footer > * { transform: none; }
+      .watermark { margin-left: 0; text-align: center; }
+      
+      .bg-06 { font-size: 80px; bottom: 0px; right: 10px; opacity: 0.5; }
+      .bg-barcode { bottom: 20px; left: 10px; opacity: 0.3; }
+      
+      .pcam-3d { width: 260px; height: 170px; }
       .lens-container { width: 70px; height: 70px; }
       .lens-inner { width: 45px; height: 45px; }
-      .cam-slot { width: 220px; }
-      .strip-container { width: 140px; }
+      .cam-slot { width: 200px; }
+      .strip-container { width: 140px; animation: none; }
+      .print-stage { padding-bottom: 100px; }
     }
-    @media (max-width: 380px) {
+    
+    @media (max-width: 420px) {
       .app { padding-right: 13px; padding-left: 13px; }
-      .filter-list { gap: 3px; }
-      .secondary-actions { gap: 8px; }
-      .secondary-button { padding-right: 6px; padding-left: 6px; font-size: 9px; }
+      
+      .secondary-actions { flex-direction: column; gap: 8px; }
+      .secondary-button { padding: 10px; font-size: 11px; transform: skewX(-4deg); }
+      .secondary-button > * { transform: skewX(4deg); }
+      
+      .settings-sheet .seg { flex-direction: column; }
+      .settings-sheet .seg button { width: 100%; flex: none; }
+      
+      .pcam-3d { width: 220px; height: 150px; }
+      .lens-container { width: 60px; height: 60px; border-width: 3px; }
+      .lens-inner { width: 38px; height: 38px; }
+      .lens-glass { width: 12px; height: 8px; top: 6px; left: 6px; }
+      .cam-slot { width: 160px; }
+      .strip-container { width: 120px; }
+      
+      .tool-btn { width: 40px; height: 40px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
       .app.wobble { animation: none; }
@@ -643,7 +815,6 @@
 </head>
 <body data-theme="blue">
   
-  <!-- Background decorative elements -->
   <div class="bg-decor bg-star bg-star-1">✦</div>
   <div class="bg-decor bg-star bg-star-2">✦</div>
   <div class="bg-decor bg-star bg-star-3">✦</div>
@@ -652,7 +823,6 @@
 
   <div class="app" id="mainApp">
     <header>
-      <!-- Top left text removed as requested -->
       <div class="header-right">
         <div class="privacy-note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.8-3 8-7 10-4-2-7-5.2-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -736,8 +906,16 @@
         <div class="filter-list" role="group" aria-label="Photo filter">
           <button class="filter-button" type="button" data-filter="original" aria-pressed="true"><span class="swatch"></span><span>Original</span></button>
           <button class="filter-button" type="button" data-filter="warm" aria-pressed="false"><span class="swatch warm"></span><span>Golden</span></button>
-          <button class="filter-button" type="button" data-filter="mono" aria-pressed="false"><span class="swatch mono"></span><span>Classic</span></button>
+          <button class="filter-button" type="button" data-filter="vintage" aria-pressed="false"><span class="swatch vintage"></span><span>Vintage</span></button>
+          <button class="filter-button" type="button" data-filter="sunset" aria-pressed="false"><span class="swatch sunset"></span><span>Sunset</span></button>
           <button class="filter-button" type="button" data-filter="rose" aria-pressed="false"><span class="swatch rose"></span><span>Rosy</span></button>
+          <button class="filter-button" type="button" data-filter="lavender" aria-pressed="false"><span class="swatch lavender"></span><span>Lavender</span></button>
+          <button class="filter-button" type="button" data-filter="cool" aria-pressed="false"><span class="swatch cool"></span><span>Cool</span></button>
+          <button class="filter-button" type="button" data-filter="mint" aria-pressed="false"><span class="swatch mint"></span><span>Mint</span></button>
+          <button class="filter-button" type="button" data-filter="fade" aria-pressed="false"><span class="swatch fade"></span><span>Fade</span></button>
+          <button class="filter-button" type="button" data-filter="vivid" aria-pressed="false"><span class="swatch vivid"></span><span>Vivid</span></button>
+          <button class="filter-button" type="button" data-filter="mono" aria-pressed="false"><span class="swatch mono"></span><span>Classic</span></button>
+          <button class="filter-button" type="button" data-filter="noir" aria-pressed="false"><span class="swatch noir"></span><span>Noir</span></button>
         </div>
 
         <div class="rule"></div>
@@ -781,7 +959,40 @@
     </footer>
   </div>
 
-  <!-- Settings Backdrop (Glass Theme) -->
+  <!-- Sticker Studio (Paint Style + P5 Glass) -->
+  <div class="sticker-overlay" id="stickerOverlay" hidden>
+    <div class="paint-window">
+      <div class="paint-titlebar">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          untitled - Paint
+        </h3>
+        <div class="win-controls">
+          <!-- Only the Close button remains -->
+          <button class="win-btn" onclick="closeSticker()" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="paint-body">
+        <div class="paint-tools" id="stickerPalette">
+          <!-- Upload Button -->
+          <label class="tool-upload">
+            + Upload
+            <input type="file" id="stickerUpload" accept="image/*" multiple style="display: none;">
+          </label>
+          <!-- Tools populated via JS -->
+        </div>
+        <div class="paint-canvas-area" id="stickerCanvasArea">
+          <img id="stickerPreviewImg" src="" alt="Your strip">
+          <!-- Placed stickers go here -->
+        </div>
+      </div>
+      <div class="paint-statusbar">
+        <span>For Help, click Help Topics on the Help Menu.</span>
+        <button class="finish-btn" onclick="finishStickers()">Save & Print</button>
+      </div>
+    </div>
+  </div>
+
   <div class="settings-backdrop" id="settingsBackdrop" hidden>
     <aside class="settings-sheet" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="panel-heading">
@@ -829,27 +1040,19 @@
     </aside>
   </div>
 
-  <!-- Print Overlay -->
   <div class="print-overlay" id="printOverlay" hidden role="dialog" aria-modal="true" aria-label="Your Polaroids">
     <div class="print-stage">
       
-      <!-- NEW ONE-STEP CAMERA -->
       <div class="pcam-3d" id="pcam">
         <div class="cam-body">
-          
           <div class="cam-label">OneStep</div>
-          
-          <div class="cam-top">
-            <!-- Top black bar empty, just for structure -->
-          </div>
-          
+          <div class="cam-top"></div>
           <div class="cam-middle">
             <div class="lens-container">
               <div class="lens-inner">
                 <div class="lens-glass"></div>
               </div>
             </div>
-            
             <div class="cam-side-elements">
               <div class="flash-unit">
                 <div class="flash-grid"></div>
@@ -857,20 +1060,16 @@
                 <div class="flash-grid"></div>
               </div>
             </div>
-
             <div class="red-btn"></div>
             <div class="rainbow-stripe"></div>
           </div>
-          
           <div class="cam-bottom">
             <div class="cam-bottom-text">POLAROID LAND CAMERA</div>
             <div class="cam-slot"></div>
           </div>
-
         </div>
       </div>
 
-      <!-- The strip container that feeds down -->
       <div class="strip-container" id="stripContainer"></div>
 
       <p class="print-hint" id="printHint" role="status"></p>
@@ -909,11 +1108,41 @@
     const mainApp = document.getElementById("mainApp");
     const stripContainer = document.getElementById("stripContainer");
 
+    // Sticker Studio Elements
+    const stickerOverlay = document.getElementById("stickerOverlay");
+    const stickerPalette = document.getElementById("stickerPalette");
+    const stickerCanvasArea = document.getElementById("stickerCanvasArea");
+    const stickerPreviewImg = document.getElementById("stickerPreviewImg");
+    const stickerUpload = document.getElementById("stickerUpload");
+    
+    let currentStripDataUrl = "";
+    let placedStickers = [];
+    let selectedSticker = null;
+    let activeSticker = null;
+
+    // Default SVG Stickers (Fallback)
+    const defaultStickers = [
+      { id: 'heart', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 85 L15 50 A20 20 0 0 1 50 20 A20 20 0 0 1 85 50 Z" fill="#8B0000"/></svg>` },
+      { id: 'star', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 61,35 95,35 68,57 79,90 50,70 21,90 32,57 5,35 39,35" fill="#8B0000"/></svg>` },
+      { id: 'vinyl', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="#111"/><circle cx="50" cy="50" r="15" fill="#8B0000"/><circle cx="50" cy="50" r="5" fill="#111"/></svg>` },
+      { id: 'cherry', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="70" r="18" fill="#8B0000"/><circle cx="70" cy="70" r="18" fill="#8B0000"/><path d="M30 55 Q30 20 70 20" stroke="#228B22" stroke-width="3" fill="none"/><path d="M70 55 Q70 30 70 20" stroke="#228B22" stroke-width="3" fill="none"/></svg>` }
+    ];
+    
+    let stickerOptions = [...defaultStickers];
+
     const filters = {
       original: "none",
       warm: "sepia(0.28) saturate(1.2) brightness(1.04)",
+      vintage: "sepia(0.45) contrast(0.9) brightness(1.08) saturate(0.85)",
+      sunset: "sepia(0.35) saturate(1.5) hue-rotate(-12deg) brightness(1.06)",
+      rose: "sepia(0.16) saturate(1.22) hue-rotate(315deg) brightness(1.03)",
+      lavender: "sepia(0.28) hue-rotate(230deg) saturate(1.25) brightness(1.05)",
+      cool: "sepia(0.3) hue-rotate(180deg) saturate(1.3) brightness(1.05)",
+      mint: "sepia(0.25) hue-rotate(70deg) saturate(1.15) brightness(1.05)",
+      fade: "contrast(0.82) brightness(1.12) saturate(0.7)",
+      vivid: "saturate(1.7) contrast(1.15) brightness(1.02)",
       mono: "grayscale(1) contrast(1.06)",
-      rose: "sepia(0.16) saturate(1.22) hue-rotate(315deg) brightness(1.03)"
+      noir: "grayscale(1) contrast(1.55) brightness(0.95)"
     };
     const layouts = {
       "vertical-2": { count: 2, type: "vertical", label: "Double take" },
@@ -1181,7 +1410,10 @@
         stripStatus.textContent = "Ready to keep";
         stripStatus.classList.add("ready");
         downloadButton.hidden = false;
-        if (settings.polaroid) showPolaroids(shots.slice(), selectedFilter);
+        
+        // Open the sticker editor instead of immediately printing
+        openStickerEditor(dataUrl);
+
       } catch (error) {
         shots = [];
         stripStatus.textContent = "Coming soon";
@@ -1195,6 +1427,327 @@
         updateCameraView();
       }
     }
+
+    /* ---- STICKER STUDIO LOGIC ---- */
+    function initStickerPalette() {
+      stickerPalette.innerHTML = `
+        <label class="tool-upload">
+          + Upload
+          <input type="file" id="stickerUpload" accept="image/*" multiple style="display: none;">
+        </label>
+      `;
+      
+      // Re-bind upload event
+      const uploadInput = document.getElementById("stickerUpload");
+      uploadInput.addEventListener("change", handleStickerUpload);
+
+      stickerOptions.forEach(sticker => {
+        const btn = document.createElement('button');
+        btn.className = 'tool-btn';
+        if (sticker.svg) {
+            btn.innerHTML = sticker.svg;
+        } else if (sticker.url) {
+            btn.innerHTML = `<img src="${sticker.url}" alt="sticker">`;
+        }
+        
+        btn.onclick = () => {
+          activeSticker = sticker;
+          document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        };
+        stickerPalette.appendChild(btn);
+      });
+      
+      const clearBtn = document.createElement('button');
+      clearBtn.className = 'tool-clear';
+      clearBtn.textContent = 'Clear All';
+      clearBtn.onclick = () => {
+        placedStickers = [];
+        document.querySelectorAll('.placed-sticker').forEach(el => el.remove());
+      };
+      stickerPalette.appendChild(clearBtn);
+    }
+
+    function handleStickerUpload(event) {
+        const files = event.target.files;
+        if (!files.length) return;
+
+        Array.from(files).forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSticker = { id: 'custom-' + Date.now(), url: e.target.result };
+                stickerOptions.push(newSticker);
+                
+                // Add to UI
+                const btn = document.createElement('button');
+                btn.className = 'tool-btn active'; // Auto select uploaded
+                btn.innerHTML = `<img src="${newSticker.url}" alt="custom sticker">`;
+                btn.onclick = () => {
+                    activeSticker = newSticker;
+                    document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                };
+                // Insert before clear button
+                const clearBtn = stickerPalette.querySelector('.tool-clear');
+                stickerPalette.insertBefore(btn, clearBtn);
+                
+                // Set as active
+                document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeSticker = newSticker;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function openStickerEditor(url) {
+      currentStripDataUrl = url;
+      stickerPreviewImg.src = url;
+      placedStickers = [];
+      selectedSticker = null;
+      document.querySelectorAll('.placed-sticker').forEach(el => el.remove());
+      
+      // Default to first sticker
+      if (!activeSticker && stickerOptions.length > 0) {
+          activeSticker = stickerOptions[0];
+      }
+      
+      initStickerPalette();
+      stickerOverlay.hidden = false;
+    }
+
+    window.closeSticker = function() {
+      stickerOverlay.hidden = true;
+    }
+
+    // Sticker Interaction (Drag & Drop)
+    let isDragging = false;
+    let isResizing = false;
+    let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+    let startWidth, startHeight, startMouseX, startMouseY;
+
+    function createStickerElement(sticker) {
+        const el = document.createElement('div');
+        el.className = 'placed-sticker';
+        el.style.left = '50%';
+        el.style.top = '50%';
+        
+        if (sticker.svg) {
+            el.innerHTML = sticker.svg;
+            el.dataset.svg = sticker.svg;
+        } else {
+            el.innerHTML = `<img src="${sticker.url}" style="pointer-events:none;">`;
+            el.dataset.url = sticker.url;
+        }
+        
+        // Add controls
+        const controls = document.createElement('div');
+        controls.className = 'sticker-controls';
+        controls.innerHTML = `
+            <div class="delete-handle">×</div>
+            <div class="resize-handle"></div>
+        `;
+        el.appendChild(controls);
+
+        // Delete logic
+        controls.querySelector('.delete-handle').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            el.remove();
+            placedStickers = placedStickers.filter(s => s !== el);
+            if (selectedSticker === el) selectedSticker = null;
+        });
+
+        // Resize logic
+        const resizeHandle = controls.querySelector('.resize-handle');
+        resizeHandle.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            isResizing = true;
+            startMouseX = e.clientX;
+            startMouseY = e.clientY;
+            startWidth = el.offsetWidth;
+            startHeight = el.offsetHeight;
+            el.setPointerCapture(e.pointerId);
+        });
+
+        // Drag logic
+        el.addEventListener('pointerdown', (e) => {
+            if (e.target.classList.contains('resize-handle') || e.target.classList.contains('delete-handle')) return;
+            e.stopPropagation();
+            selectSticker(el);
+            isDragging = true;
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+            el.setPointerCapture(e.pointerId);
+        });
+
+        el.addEventListener('pointermove', (e) => {
+            if (isDragging && selectedSticker === el) {
+                e.preventDefault();
+                xOffset = e.clientX - initialX;
+                yOffset = e.clientY - initialY;
+                
+                const rect2 = stickerCanvasArea.getBoundingClientRect();
+                const mouseX = e.clientX - rect2.left;
+                const mouseY = e.clientY - rect2.top;
+                
+                // Boundary checks
+                if (mouseX > 0 && mouseX < rect2.width && mouseY > 0 && mouseY < rect2.height) {
+                     el.style.left = `${(mouseX / rect2.width) * 100}%`;
+                     el.style.top = `${(mouseY / rect2.height) * 100}%`;
+                }
+            } else if (isResizing && selectedSticker === el) {
+                e.preventDefault();
+                const dx = e.clientX - startMouseX;
+                const dy = e.clientY - startMouseY;
+                el.style.width = `${Math.max(30, startWidth + dx)}px`;
+                el.style.height = `${Math.max(30, startHeight + dy)}px`;
+            }
+        });
+
+        el.addEventListener('pointerup', (e) => {
+            isDragging = false;
+            isResizing = false;
+            el.releasePointerCapture(e.pointerId);
+        });
+
+        stickerCanvasArea.appendChild(el);
+        placedStickers.push(el);
+        selectSticker(el);
+    }
+
+    function selectSticker(el) {
+        document.querySelectorAll('.placed-sticker').forEach(s => s.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedSticker = el;
+        let maxZ = 10;
+        document.querySelectorAll('.placed-sticker').forEach(s => {
+            maxZ = Math.max(maxZ, parseInt(s.style.zIndex) || 10);
+        });
+        el.style.zIndex = maxZ + 1;
+    }
+
+    // Place sticker on click
+    stickerCanvasArea.addEventListener('pointerdown', (e) => {
+        if (e.target === stickerPreviewImg || e.target === stickerCanvasArea) {
+            document.querySelectorAll('.placed-sticker').forEach(s => s.classList.remove('selected'));
+            selectedSticker = null;
+
+            if (activeSticker) {
+                const rect = stickerPreviewImg.getBoundingClientRect();
+                if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                    const areaRect = stickerCanvasArea.getBoundingClientRect();
+                    const percentX = ((e.clientX - areaRect.left) / areaRect.width) * 100;
+                    const percentY = ((e.clientY - areaRect.top) / areaRect.height) * 100;
+                    
+                    createStickerElement(activeSticker);
+                    
+                    const newSticker = placedStickers[placedStickers.length - 1];
+                    newSticker.style.left = `${percentX}%`;
+                    newSticker.style.top = `${percentY}%`;
+                }
+            }
+        }
+    });
+
+    window.finishStickers = async function() {
+      if (!currentStripDataUrl) return;
+
+      // ---- STEP 1: Measure everything while the editor is still visible ----
+      const imgRect = stickerPreviewImg.getBoundingClientRect();
+      const areaRect = stickerCanvasArea.getBoundingClientRect();
+
+      const measurements = placedStickers.map((el) => {
+        const areaX = (parseFloat(el.style.left) / 100) * areaRect.width;
+        const areaY = (parseFloat(el.style.top) / 100) * areaRect.height;
+        const imgX = areaX - (imgRect.left - areaRect.left);
+        const imgY = areaY - (imgRect.top - areaRect.top);
+
+        return {
+          el,
+          xPercent: (imgX / imgRect.width) * 100,
+          yPercent: (imgY / imgRect.height) * 100,
+          wPercent: (el.offsetWidth / imgRect.width) * 100,
+          hPercent: (el.offsetHeight / imgRect.height) * 100
+        };
+      });
+
+      // ---- STEP 2: Safe to hide now that we have real numbers ----
+      stickerOverlay.hidden = true;
+
+      const img = new Image();
+      img.src = currentStripDataUrl;
+      await img.decode();
+      
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      
+      ctx.drawImage(img, 0, 0);
+      
+      for (const m of measurements) {
+        const px = (m.xPercent / 100) * canvas.width;
+        const py = (m.yPercent / 100) * canvas.height;
+        const pWidth = (m.wPercent / 100) * canvas.width;
+        const pHeight = (m.hPercent / 100) * canvas.height;
+
+        if (!Number.isFinite(px) || !Number.isFinite(py) || !Number.isFinite(pWidth) || !Number.isFinite(pHeight) || pWidth <= 0 || pHeight <= 0) {
+          continue;
+        }
+
+        if (m.el.dataset.url) {
+          const stickerImg = new Image();
+          stickerImg.src = m.el.dataset.url;
+          await new Promise((resolve) => { stickerImg.onload = resolve; });
+          ctx.drawImage(stickerImg, px - pWidth / 2, py - pHeight / 2, pWidth, pHeight);
+        } else if (m.el.dataset.svg) {
+          const svgString = m.el.dataset.svg;
+          const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(svgBlob);
+          const svgImg = new Image();
+          await new Promise((resolve) => { svgImg.onload = resolve; svgImg.src = url; });
+          ctx.drawImage(svgImg, px - pWidth / 2, py - pHeight / 2, pWidth, pHeight);
+          URL.revokeObjectURL(url);
+        }
+      }
+      
+      const finalDataUrl = canvas.toDataURL("image/png");
+      setStripImage(finalDataUrl);
+      
+      // SLICE THE COMPOSITE IMAGE BACK INTO INDIVIDUAL PHOTOS FOR PRINTING
+      if (settings.polaroid) {
+        const layout = layouts[selectedLayout];
+        const width = 760;
+        const margin = 20;
+        const photoWidth = 720;
+        const photoHeight = 540;
+        const gap = 14;
+        const columns = layout.type === "grid" ? 2 : 1;
+        const rows = layout.type === "grid" ? 2 : layout.count;
+        const cellWidth = (photoWidth - gap * (columns - 1)) / columns;
+        const cellHeight = layout.type === "grid" ? (photoHeight - gap * (rows - 1)) / rows : photoHeight;
+        
+        const slices = [];
+        for (let index = 0; index < layout.count; index++) {
+          const column = layout.type === "grid" ? index % columns : 0;
+          const row = layout.type === "grid" ? Math.floor(index / columns) : index;
+          const x = margin + column * (cellWidth + gap);
+          const y = margin + row * (cellHeight + gap);
+          
+          const sliceCanvas = document.createElement('canvas');
+          sliceCanvas.width = Math.floor(cellWidth);
+          sliceCanvas.height = Math.floor(cellHeight);
+          const sliceCtx = sliceCanvas.getContext('2d');
+          
+          sliceCtx.drawImage(canvas, x, y, cellWidth, cellHeight, 0, 0, sliceCanvas.width, sliceCanvas.height);
+          slices.push(sliceCanvas.toDataURL('image/png'));
+        }
+        
+        showPolaroids(slices, selectedFilter); 
+      }
+    };
+
 
     for (const button of layoutButtons) {
       button.addEventListener("click", () => {
@@ -1292,8 +1845,7 @@
       if (stripUrl.startsWith("blob:")) URL.revokeObjectURL(stripUrl);
     });
 
-    /* ---- settings (saved in localStorage) ---- */
-    const SETTINGS_KEY = "littleMoments.settings.v4";
+    const SETTINGS_KEY = "littleMoments.settings.v5"; 
     const defaults = { theme: "blue", wobble: true, countdown: 3, polaroid: true, layout: "vertical-3", filter: "original" };
     const settings = { ...defaults };
     try { Object.assign(settings, JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}")); } catch {}
@@ -1359,22 +1911,22 @@
     settingsClose.addEventListener("click", () => toggleSettings(false));
     settingsBackdrop.addEventListener("click", (event) => { if (event.target === settingsBackdrop) toggleSettings(false); });
 
-    /* ---- polaroid print-out ---- */
     function closePrint() { printRun += 1; printOverlay.hidden = true; }
     printClose.addEventListener("click", closePrint);
     printOverlay.addEventListener("click", (event) => { if (event.target === printOverlay) closePrint(); });
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (!settingsBackdrop.hidden) toggleSettings(false);
+      else if (!stickerOverlay.hidden) closeSticker();
       else if (!printOverlay.hidden) closePrint();
     });
 
     async function showPolaroids(photos, filterName) {
       const run = ++printRun;
-      stripContainer.innerHTML = ''; // Clear previous
-      stripContainer.style.animation = "none"; // Reset twist
-      void stripContainer.offsetWidth; // Trigger reflow
-      stripContainer.style.animation = ""; // Reapply twist
+      stripContainer.innerHTML = ''; 
+      stripContainer.style.animation = "none"; 
+      void stripContainer.offsetWidth; 
+      stripContainer.style.animation = ""; 
       
       printHint.textContent = "Warming up the printer…";
       printOverlay.hidden = false;
@@ -1390,7 +1942,6 @@
         frame.className = "strip-frame";
         frame.title = "Save this Polaroid";
         
-        // Stagger the animation
         frame.style.animationDelay = "0s"; 
         
         frame.innerHTML = `
@@ -1400,13 +1951,12 @@
         
         const img = frame.querySelector("img");
         img.src = photos[i];
-        img.style.filter = filters[filterName];
         
         frame.addEventListener("click", () => savePolaroid(photos[i], filterName, i));
         
         stripContainer.append(frame);
         printHint.textContent = `Printing ${i + 1} of ${photos.length}…`;
-        await delay(1200); // Wait for this one to feed out before starting the next
+        await delay(1200); 
       }
       
       if (run === printRun) printHint.textContent = "Tap a photo to save it";
@@ -1428,13 +1978,13 @@
       ctx.fillStyle = paperColor;
       ctx.fillRect(0, 0, 640, 770);
       
-      // Photo
       ctx.save();
-      ctx.filter = filters[filterName];
+      if (!photo.startsWith('data:')) {
+        ctx.filter = filters[filterName];
+      }
       drawImage(ctx, img, 40, 40, 560, 560);
       ctx.restore();
       
-      // Text
       ctx.fillStyle = accentColor;
       ctx.textAlign = "center";
       ctx.font = 'bold 36px "Impact", "Arial Black", sans-serif';
