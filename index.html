@@ -985,7 +985,7 @@
 
         <section class="session-card" aria-label="Invite a friend to the photo booth">
           <div class="section-label"><span>Booth buddies</span></div>
-          <p class="session-copy">Bring a friend into the booth and see both cameras side by side. Either person can choose the strip layout, and that choice updates on both screens. Filters and editing stay personal, so each of you can make your own keepsake.</p>
+          <p class="session-copy">Bring a friend into the booth and see both cameras side by side. Either person can choose the strip layout and the filter, and both choices update on both screens. Stickers and editing stay personal, so each of you can make your own keepsake.</p>
           <div class="session-actions">
             <button class="secondary-button" id="inviteFriendButton" type="button">
               <span>✦</span><span>Invite a friend</span>
@@ -1271,6 +1271,7 @@
     let sharedLayoutReady = false;
     const layoutClientId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 9)}`;
     let layoutVersion = { counter: 0, authorId: "" };
+    let filterVersion = { counter: 0, authorId: "" };
     let activeCaptureTotal = 0;
 
     function setProgress(completed, label, totalOverride) {
@@ -1320,14 +1321,15 @@
       const guestWaiting = sessionMode && !isSessionHost;
       captureButton.disabled = !active || capturing || waitingForFriend || guestWaiting;
       for (const button of layoutButtons) button.disabled = capturing || (sessionMode && !isSessionHost && !sharedLayoutReady);
-      for (const button of filterButtons) button.disabled = capturing;
+      for (const button of filterButtons) button.disabled = capturing || (sessionMode && !isSessionHost && !sharedLayoutReady);
       captureLabel.textContent = capturing ? "Smile..." : guestWaiting ? "Host takes the photos" : waitingForFriend ? "Waiting for friend" : shots.length ? "New Strip" : `Take ${sharedShotCount} photos`;
       camera.style.filter = filters[selectedFilter];
+      remoteCamera.style.filter = filters[selectedFilter];
       stepCount.textContent = sessionMode
         ? `${sharedShotCount} shared photos · one shared strip`
         : `${photoCount} photos · 1 strip`;
       controlCopy.textContent = sessionMode
-        ? `The strip layout is shared. Either person can change it, and the same choice appears on both screens. Your filters stay personal.`
+        ? `The strip layout and filter are shared. Either person can change them, and the same choice appears on both screens.`
         : `Choose a ${photoCount}-photo layout and a look. We'll count down before each shot, then make your keepsake strip.`;
       stripPlaceholderText.textContent = `Your ${photoCount} snapshots will appear here.`;
     }
@@ -1655,6 +1657,54 @@
       }
     }
 
+    function filterLabel(filterKey) {
+      const button = filterButtons.find((option) => option.dataset.filter === filterKey);
+      return button ? button.querySelector("span:last-child").textContent : filterKey;
+    }
+
+    async function applySharedFilter(filterKey, options = {}) {
+      if (!Object.hasOwn(filters, filterKey)) return;
+      const { broadcast = false, version = null } = options;
+      if (version && Number.isSafeInteger(version.counter) && version.counter >= 0 && typeof version.authorId === "string") {
+        const incoming = { counter: version.counter, authorId: version.authorId.slice(0, 100) };
+        const newer = incoming.counter > filterVersion.counter ||
+          (incoming.counter === filterVersion.counter && incoming.authorId.localeCompare(filterVersion.authorId) > 0);
+        if (!newer && (incoming.counter !== filterVersion.counter || incoming.authorId !== filterVersion.authorId)) return;
+        filterVersion = incoming;
+      } else if (broadcast) {
+        filterVersion = { counter: filterVersion.counter + 1, authorId: layoutClientId };
+      }
+
+      const changed = selectedFilter !== filterKey;
+      selectedFilter = filterKey;
+      settings.filter = selectedFilter;
+      saveSettings();
+      for (const option of filterButtons) {
+        option.setAttribute("aria-pressed", String(option.dataset.filter === selectedFilter));
+      }
+
+      if (broadcast && sessionMode && dataConnection?.open) {
+        sendPeerMessage({ type: "filter-choice", filter: selectedFilter, version: filterVersion });
+      }
+
+      updateCameraView();
+      if (changed && shots.length >= layouts[selectedLayout].count) {
+        try {
+          await renderCurrentStrip();
+        } catch (error) {
+          cameraError.textContent = error instanceof Error ? error.message : "Couldn't update the photo strip filter.";
+        }
+      }
+      if (sessionMode && changed) {
+        setSessionStatus(
+          dataConnection?.open
+            ? `Shared filter: ${filterLabel(selectedFilter)}. Both screens match.`
+            : `Your ${filterLabel(selectedFilter)} filter will be shared when your friend joins.`,
+          true
+        );
+      }
+    }
+
     async function handleIncomingStripMessage(message) {
       if (!message || typeof message !== "object") return;
       if (message.type === "layout-choice") {
@@ -1664,6 +1714,15 @@
             : { counter: layoutVersion.counter + 1, authorId: "legacy-peer" };
           await applySharedLayout(message.layout, { version: incomingVersion });
           setSessionStatus(`Shared strip layout: ${layouts[selectedLayout].label}. Both screens are in sync.`, true);
+        }
+        return;
+      }
+      if (message.type === "filter-choice") {
+        if (Object.hasOwn(filters, message.filter)) {
+          const incomingVersion = message.version && Number.isSafeInteger(message.version.counter) && typeof message.version.authorId === "string"
+            ? message.version
+            : { counter: filterVersion.counter + 1, authorId: "legacy-peer" };
+          await applySharedFilter(message.filter, { version: incomingVersion });
         }
         return;
       }
@@ -1772,8 +1831,10 @@
         if (sessionMode && isSessionHost) {
           sharedLayoutReady = true;
           if (!layoutVersion.authorId) layoutVersion = { counter: 1, authorId: layoutClientId };
+          if (!filterVersion.authorId) filterVersion = { counter: 1, authorId: layoutClientId };
           sendPeerMessage({ type: "layout-choice", layout: selectedLayout, version: layoutVersion });
-          setSessionStatus(`Room connected. Your ${layouts[selectedLayout].label} layout is now shared.`, true);
+          sendPeerMessage({ type: "filter-choice", filter: selectedFilter, version: filterVersion });
+          setSessionStatus(`Room connected. Your ${layouts[selectedLayout].label} layout and ${filterLabel(selectedFilter)} filter are now shared.`, true);
         } else {
           setSessionStatus("Connected! Syncing the shared strip layout…", true);
         }
@@ -1818,6 +1879,7 @@
         isSessionHost = true;
         sharedLayoutReady = true;
         layoutVersion = { counter: 1, authorId: layoutClientId };
+        filterVersion = { counter: 1, authorId: layoutClientId };
         peer = new window.Peer();
         peer.on("connection", (connection) => {
           if (dataConnection) {
@@ -1872,6 +1934,7 @@
         isSessionHost = false;
         sharedLayoutReady = false;
         layoutVersion = { counter: 0, authorId: "" };
+        filterVersion = { counter: 0, authorId: "" };
         peer = new window.Peer();
         peer.on("call", (call) => {
           mediaConnection = call;
@@ -1945,7 +2008,7 @@
 
     async function shareShotsWithFriend(photoShots) {
       if (!dataConnection?.open) throw new Error("Your friend disconnected before the photos could be shared.");
-      // Send the captured frames; both browsers build the same shared layout locally with their own filter.
+      // Send the captured frames; both browsers build the same shared layout locally with the shared filter.
       const payload = JSON.stringify(photoShots);
       const chunkSize = 12000;
       const totalChunks = Math.ceil(payload.length / chunkSize);
@@ -2378,15 +2441,9 @@
 
     for (const button of filterButtons) {
       button.addEventListener("click", () => {
-        selectedFilter = button.dataset.filter;
-        settings.filter = selectedFilter; saveSettings();
-        for (const option of filterButtons) option.setAttribute("aria-pressed", String(option === button));
-        updateCameraView();
-        if (shots.length >= layouts[selectedLayout].count) {
-          renderCurrentStrip().catch((error) => {
-            cameraError.textContent = error instanceof Error ? error.message : "Couldn't update the photo strip filter.";
-          });
-        }
+        applySharedFilter(button.dataset.filter, { broadcast: sessionMode }).catch((error) => {
+          cameraError.textContent = error instanceof Error ? error.message : "Couldn't update the shared filter.";
+        });
       });
     }
 
